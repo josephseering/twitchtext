@@ -47,7 +47,7 @@ def MarkBannedMessages():
 				all.append(row2)
 
 			# Changes the last cell in the header row from a "0" to "banned"
-			all[0][13] = "banned"
+			# all[0][13] = "banned"
 			
 			# Appends a zero to the last message in the set. We don't have the next message
 			#	so we can't tell if it got banned, so we assume it wasn't.
