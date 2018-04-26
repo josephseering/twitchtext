@@ -6,10 +6,10 @@ HOST = "irc.chat.twitch.tv"
 #PORT = 443
 PORT = 6667
 
-# Ask me for the password
+# oauth token text for the account you're using as a bot. Get (currently) at https://twitchapps.com/tmi/. Format "oauth:ab12cd34etc"
 PASS = ""
 
-# Ask me for bot's username
+# the account username for whatever account you're using as a bot. Format "username"
 IDENT = ""
 
 # List of channels to look at if you want to hard code it, but this then needs to be adjusted a bunch of other places
