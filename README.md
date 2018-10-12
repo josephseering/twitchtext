@@ -1,7 +1,16 @@
 # twitchtext
 
-Runv3 is the main file to run, the rest are various dependencies. getchannellist is used by Socketv2. All other things (including Socketv2) are used in Runv3. <br />
-<br />
+### Note: This scraper bot was created by and is maintained by Joseph Seering (me), jseering@andrew.cmu.edu. I am happy to share this code with you to help you gather data, but I'd appreciate it if you let me know who you are and roughly what you plan to do with it.
+
+### If you do use this bot or a modified version of it, I would appreciate it if you would cite my [Shaping Pro and Anti-Social Behavior on Twitch Through Moderation and Example-Setting](https://dl.acm.org/citation.cfm?id=2998277), as it was the first paper to use this bot.
+
+File descriptions:
+- Runv3.py: when you've set up the scraper and you're ready to go, run this.
+- Socketv2.py: Joins the channels you want to scrape.
+- getchannellist.py: Called by Socketv2.py when joining, this pulls names of channels you want to scrape from the channellist.csv file
+- Readv3.py: This defines a number of functions to parse the raw text sent by Twitch IRC in order to pull out useful values.
+- Settingsv2.py: Stores various useful values required in other parts of the code
+
 This bot will not run as-is. It needs to be modified to add a list of channels to scrape and doesn't have a username or password to connect to Twitch with. These are pretty easy to add, but I won't put my own here for obvious reasons (i.e., my account info and research participant privacy).
 
 Things to do before this will work:
