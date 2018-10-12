@@ -1,5 +1,5 @@
 # This actually runs the thing. 
-# - a separate file named "engsample.csv" must be in the same folder. It needs to have a list of channel names in the first column, one per row.
+# - a separate file named "channellist.csv" must be in the same folder. It needs to have a list of channel names in the first column, one per row.
 # - It uses stuff from Socketv2 to actually join the IRC chats of the channels to be scraped
 # - It uses stuff from Readv3 to parse the text it gets from Twitch.
 # - It uses stuff from Settingsv2 for various inputs.
@@ -10,34 +10,26 @@ import string
 import csv
 import time
 import operator
-from Readv3 import getUser, getMessage, getChannelname, getBannedUser, getBannedChannelname
-from Readv3 import getslowmode, getr9k, getsubmode, getroomstatechannelname
-from Readv3 import getOwner, getTurbo, getSub, getMod
-from Socketv2 import openSocket, sendMessage, closeSocket
-#from Initializev2 import joinRoom #I'm pretty sure this doesn't do anything
-from Settingsv2 import ROUNDS, ROUNDLENGTH #, CHANNELLIST, HOST, PORT, PASS, IDENT
-#from getchannellist import getbucketdict
 from datetime import datetime
-from sorter import sortbyUsername
-from banfinder import MarkBannedMessages
+from Readv3 import getUser, getMessage, getChannelname, getBannedUser, getBannedChannelname, getMessageID, getBanduration, getBanreason, getBantarget, getUserID
+from Readv3 import getslowmode, getr9k, getsubmode, getemoteonly, getfollowersonly, getroomstatechannelname
+from Readv3 import getOwner, getTurbo, getSub, getMod, getGlobalmodbadge, getAdminbadge, getStaffbadge
+from Readv3 import getSubbadge, getBitsbadge, getPartnerbadge
+from Socketv2 import openSocket, sendMessage, closeSocket
+from Settingsv2 import ROUNDS, ROUNDLENGTH
+
 
 # Actually joins the rooms
 s = openSocket()
 ### joinRoom(s)
 readbuffer = ""
 
+# Initializes mode settings
 r9ksettings = {}
 slowsettings = {}
 subsettings = {}
-#bucketsizes = {}
-
-#bucketsizes = getbucketdict()
-
-# Opens the output file (all.csv) and writes the headers
-#with open('all.csv', 'ab') as fp:
-#	ab = csv.writer(fp, delimiter=',');
-#	data = ["id", "channelname", "username", "timestamp", "comment","owner","mod","sub","turbo","r9k","slow","subs","channelbucket"];
-#	ab.writerow(data);
+followersonlysettings = {}
+emoteonlysettings = {}
 
 # Starts the post counter
 id = 0
@@ -80,16 +72,27 @@ while i < (ROUNDS + 1):
 					mod = getMod(line)
 					sub = getSub(line)
 					turbo = getTurbo(line)
+					messageid = getMessageID(line)
+					userid = getUserID(line)
+					
+					subbadge = getSubbadge(line)
+					bitsbadge = getBitsbadge(line)
+					partnerbadge = getPartnerbadge(line)
+					globalmodbadge = getGlobalmodbadge(line)
+					adminbadge = getAdminbadge(line)
+					staffbadge = getStaffbadge(line)
+					
 					
 					# Though not specified in the data this way, we treat all channel owners as mods
 					if owner == 1:
 						mod = 1
 		
 					# Writes Message ID, channel, user, date/time, and cleaned message to file. Notes 1 if user is owner/mod/sub/turbo or 0 if not. 
-					# Notes 1 if r9k mode or sub mode is enabled, 0 if not. Notes number of seconds of slow mode (0 if off)
+					# Next it notes which badges the person has next to their name. They can have sub badges of 1/3/6/12/24 etc months, bit badges of various intervals, partner badge, globalmod, admin, or staff badge.
+					# Notes 1 if r9k mode or sub mode is enabled, 0 if not. Notes number of seconds of slow mode (0 if off). Followersonlymode shows number of seconds, 0 if just requires followers of any duration, and -1 if off. Emoteonly is 1 if on 0 if off.
 					with open('all' + str(i) + '.csv', 'ab') as fp:
 						ab = csv.writer(fp, delimiter=',');
-						data = [id, channelname, user, datetime.now(), message.strip(), owner, mod, sub, turbo, r9ksettings[channelname], slowsettings[channelname], subsettings[channelname]];
+						data = [id, messageid, channelname, user, datetime.now(), message.strip(), owner, mod, sub, turbo, subbadge, bitsbadge, partnerbadge, globalmodbadge, adminbadge, staffbadge, r9ksettings[channelname], slowsettings[channelname], subsettings[channelname], followersonlysettings[channelname], emoteonlysettings[channelname]];
 						ab.writerow(data);
 						print "Wrote " + str(id)
 						countdown = time.time()
@@ -120,14 +123,16 @@ while i < (ROUNDS + 1):
 					# Gets banned user's name and channel name from a line
 					user = getBannedUser(line)
 					channelname = getBannedChannelname(line)
-				
-					# Writes Message ID, channel, user, date/time, and an indicator that it was a ban message.
+					targetid = getBantarget(line)
+					banduration = getBanduration(line)
+					banreason = getBanreason(line)
+					# Writes Message ID, an indicator that it was a ban message, channel, user, date/time, reason for ban if any given, and duration of ban (can be "PERMANENT BAN") 
 					#	I use "oghma.ban" because the bot's name is oghma, and I figure it's not a phrase that's
 					#	likely to show up in a message so it's easy to search for.
-					#	The various zeroes at the end are just fillers here because this row will get removed later.
+					#	The various zeroes at the end are just fillers here because this message doesn't have those other properties.
 					with open('all' + str(i) + '.csv', 'ab') as fp:
 						ab = csv.writer(fp, delimiter=',');
-						data = [id, channelname, user, datetime.now(), "oghma.ban", 0, 0, 0, 0, 0, 0, 0];
+						data = [id, "oghma.ban", channelname, user, datetime.now(), banreason, banduration, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 						ab.writerow(data);
 						print "Wrote " + str(id)
 				# Survives if there's a ban message problem
@@ -153,6 +158,12 @@ while i < (ROUNDS + 1):
 						submode = getsubmode(line)
 						subsettings[channelname] = submode
 						#print subsettings[channelname]
+					if "followers-only" in line:
+						followermode = getfollowersonly(line)
+						followersonlysettings[channelname] = followermode
+					if "emote-only" in line:
+						emotemode = getemoteonly(line)
+						emoteonlysettings[channelname] = emotemode
 			
 				# Survives if there's a chat mode problem
 				except Exception as e:
@@ -160,7 +171,7 @@ while i < (ROUNDS + 1):
 					print line
 					print e
 				
-		# gonna be honest, I totally forget what this does
+		# If for some reason it's been more than 60 seconds since the last message, it closes and re-opens the socket.
 		if countdown + 60 < time.time():
 			closeSocket(s)
 			print "closed"
@@ -169,9 +180,3 @@ while i < (ROUNDS + 1):
 			countdown = time.time()
 					
 	i = i + 1
-
-# Creates the "sortedall" csv files, which are the all.csv sorted by username (for the purpose of finding banned messages)
-sortbyUsername()
-
-# Creates the all3.csv file, which is all2.csv with a notation if a message was banned.
-MarkBannedMessages()
