@@ -1,20 +1,19 @@
-#HOST = "irc.twitch.tv"
-#HOST = "199.9.255.149"
-#HOST = "199.9.251.213"
+# IRC Chat address
 HOST = "irc.chat.twitch.tv"
 
 #PORT = 443
 PORT = 6667
 
+### THIS NEEDS YOU TO ADD IT ###
 # oauth token text for the account you're using as a bot. Get (currently) at https://twitchapps.com/tmi/. Format "oauth:ab12cd34etc"
 PASS = ""
 
+### THIS NEEDS YOU TO ADD IT ###
 # the account username for whatever account you're using as a bot. Format "username"
 IDENT = ""
 
-# List of channels to look at if you want to hard code it, but this then needs to be adjusted a bunch of other places
-CHANNELLIST = ["lirik","bobross"]
+# the scraper will create this many files
+ROUNDS = 2
 
-ROUNDS = 25
-
+# how long it will scrape for in each file (in seconds)
 ROUNDLENGTH = 28800

@@ -5,6 +5,7 @@ import csv
 def getchannellist():
 	CHANNELLIST = []
 	
+	### YOU NEED TO MODIFY THIS FILE TO INCLUDE THE CHANNELS YOU WANT TO SCRAPE ###
 	with open('channellist.csv','rU') as csvinput:
 		
 		reader = csv.reader(csvinput)
