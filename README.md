@@ -4,7 +4,7 @@
 
 ### If you do use this bot or a modified version of it, I would appreciate it if you would cite my [Shaping Pro and Anti-Social Behavior on Twitch Through Moderation and Example-Setting](https://dl.acm.org/citation.cfm?id=2998277) paper, as it was the first paper to use this bot.
 
-File descriptions:
+**File descriptions:**
 - Runv3.py: when you've set up the scraper and you're ready to go, run this.
 - Socketv2.py: Joins the channels you want to scrape.
 - getchannellist.py: Called by Socketv2.py when joining, this pulls names of channels you want to scrape from the channellist.csv file
@@ -13,7 +13,7 @@ File descriptions:
 
 This bot will not run as-is. It needs to be modified to add a list of channels to scrape and doesn't have a username or password to connect to Twitch with. These are pretty easy to add, but I won't put my own here for obvious reasons (i.e., my account info and research participant privacy).
 
-Things to do before this will work:
+**Things to do before this will work:**
 1. Create a Twitch account the regular way on the Twitch website
 2. Add this account's username to the Settingsv2 file in the location noted
 3. Get an oauth token for this account and put it in the Settingsv2 file in the location noted. Instructions for this are in the Settingsv2 file.
