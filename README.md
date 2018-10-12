@@ -13,7 +13,7 @@
 - Readv3.py: This defines a number of functions to parse the raw text sent by Twitch IRC in order to pull out useful values.
 - Settingsv2.py: Stores various useful values required in other parts of the code
 
-This bot will not run as-is. It needs to be modified to add a list of channels to scrape and doesn't have a username or password to connect to Twitch with. These are pretty easy to add, but I won't put my own here for obvious reasons (i.e., my account info and research participant privacy).
+***This bot will not run as-is.*** It needs to be modified to add a list of channels to scrape and doesn't have a username or password to connect to Twitch with. These are pretty easy to add, but I won't put my own here for obvious reasons (i.e., my account info and research participant privacy).
 
 **Things to do before this will work:**
 1. Create a Twitch account the regular way on the Twitch website
