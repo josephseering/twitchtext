@@ -8,4 +8,4 @@ Things to do before this will work:
 1. Create a Twitch account the regular way on the Twitch website
 2. Add this account's username to the Settingsv2 file in the location noted
 3. Get an oauth token for this account and put it in the Settingsv2 file in the location noted. Instructions for this are in the Settingsv2 file.
-4. Put the names of the channels you want to scrape in the channellist.csv file
+4. Put the names of the channels you want to scrape in the channellist.csv file. (I've put "food", "bobross", and "twitchpresents" in there as examples.)
