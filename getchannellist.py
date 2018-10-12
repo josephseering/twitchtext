@@ -5,7 +5,7 @@ import csv
 def getchannellist():
 	CHANNELLIST = []
 	
-	with open('engsample.csv','rU') as csvinput:
+	with open('channellist.csv','rU') as csvinput:
 		
 		reader = csv.reader(csvinput)
 		
@@ -13,17 +13,3 @@ def getchannellist():
 			CHANNELLIST.append(row[0].strip())
 	
 	return CHANNELLIST
-
-
-# This is an old thing, don't worry about it	
-def getbucketdict():
-	BUCKETDICT = {}
-	
-	with open('engsample.csv','rU') as csvinput:
-	
-		reader = csv.reader(csvinput)
-		
-		for row in reader:
-			BUCKETDICT[row[0].strip()] = row[3].strip()
-	
-	return BUCKETDICT
