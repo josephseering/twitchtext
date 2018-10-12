@@ -3,7 +3,9 @@
 ### Note: This scraper bot was created by and is maintained by Joseph Seering (me), jseering@andrew.cmu.edu. I am happy to share this code with you to help you gather data, but I'd appreciate it if you let me know who you are and roughly what you plan to do with it.
 
 ### If you do use this bot or a modified version of it, I would appreciate it if you would cite my [Shaping Pro and Anti-Social Behavior on Twitch Through Moderation and Example-Setting](https://dl.acm.org/citation.cfm?id=2998277) paper, as it was the first paper to use this bot.
-
+  
+  
+  
 **File descriptions:**
 - Runv3.py: when you've set up the scraper and you're ready to go, run this.
 - Socketv2.py: Joins the channels you want to scrape.
