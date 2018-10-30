@@ -16,6 +16,6 @@ IDENT = ""
 ROUNDS = 2
 
 # how long it will scrape for in each file (in seconds)
-ROUNDLENGTH = 28800
+ROUNDLENGTH = 600
 
-# With the numbers I've entered here (in ROUNDS and ROUNDLENGTH), it'll scrape into one file for 28800 seconds then create a second file and scrape into it for 28800 seconds. These obviously can be changed.
+# With the numbers I've entered here (in ROUNDS and ROUNDLENGTH), it'll scrape into one file for 600 seconds (ten minutes) then create a second file and scrape into it for 600 seconds. These obviously can be changed.
