@@ -5,6 +5,30 @@
 # - It uses stuff from Settingsv2 for various inputs.
 # - It outputs the result to a set of csvs named all1.csv, all2.csv, etc up to the number set in ROUNDS
 
+# - The columns in the final output .csv will be as follows:
+# - Column 0: an ID number, literally the number of the line pulled from the buffer in the socket connection you've made (but basically just an ID number)
+# - Column 1: Twitch's internal unique ID for the message. I'm not sure there's much of a point in scraping this, but here you go.
+# - Column 2: Name of the channel where the message was sent
+# - Column 3: Name of the user who sent the message
+# - Column 4: The time when the message was sent
+# - Column 5: The message's text. Usually it does pretty well with special characters, but some of the more obscure copypasta symbols turn out weird.
+# - Column 6: 1 if the message was sent by the channel's owner (e.g., the streamer), 0 if not
+# - Column 7: 1 if the message was sent by a mod in this channel, 0 if not
+# - Column 8: 1 if the message was sent by a sub in this channel, 0 if not
+# - Column 9: 1 if the message was sent by a user with Turbo (and I believe Prime, but I'm not positive on this), 0 if not
+# - Column 10: If the user who sent the message is a sub in this channel, their badge number of months (e.g., 1 month, 3 months, 6 months, 12 months...)
+# - Column 11: If the user who sent the message has given enough bits in this channel for a badge, the number on that badge
+# - Column 12: 1 if the message was sent by a user who is a partnered streamer (I'm not positive whether this shows up only if they've chosen to have that badge visible or not), 0 if not
+# - Column 13: 1 if the message was sent by a user who is a global mod, 0 if not
+# - Column 14: 1 if the message was sent by a user who is an admin, 0 if not
+# - Column 15: 1 if the message was sent by a user who is staff, 0 if not
+# - Column 16: 1 if r9k mode was on in the channel where this message was sent when it was sent, 0 if not
+# - Column 17: If slow mode was on in the channel where this message was sent when it was sent, this will show the number of seconds slow mode was set to
+# - Column 18: 1 if subscribers-only mode was on in the channel where this message was sent when it was sent, 0 if not
+# - Column 19: -1 if, when this message was sent, you didn't have to be a follower of the channel to post a message; 0 if you had to be a follower, but not for any specific length of time; if greater than 0, you had to have been a follower for this much time to send a message to the channel
+# - Column 20: 1 if emote-only mode was on in the channel where this message was sent when it was sent, 0 if not
+
+
 
 import string
 import csv
