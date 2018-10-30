@@ -157,7 +157,7 @@ while i < (ROUNDS + 1):
 					with open('all' + str(i) + '.csv', 'ab') as fp:
 						ab = csv.writer(fp, delimiter=',');
 						data = [id, "oghma.ban", channelname, user, datetime.now(), banreason, banduration, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-						ab.writerow(data);
+						# ab.writerow(data);
 						print "Wrote " + str(id)
 				# Survives if there's a ban message problem
 				except Exception as e:
