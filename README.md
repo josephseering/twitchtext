@@ -2,7 +2,7 @@
 
 #### Note: This scraper bot was created by and is maintained by Joseph Seering (me), jseering@andrew.cmu.edu. I am happy to share this code with you to help you gather data, but I'd appreciate it if you let me know who you are and roughly what you plan to do with it.
 
-#### Also note that there are of course some privacy concerns to be considered here; in part because of Twitch's openness to third-party bot/tool developers, it's quite easy to gather a whole lot of data about what users are saying, but I would suggest that researchers should be careful not to abuse or take advantage of this access. 
+#### Also note that there are of course some privacy concerns to be considered here; in part because of Twitch's openness to third-party bot/tool developers, it's quite easy to gather a whole lot of data about what users are saying, but I would suggest that researchers should be careful not to abuse or take advantage of this access. It can be tempting to grab as much data as possible and sort out the details later, but I would encourage an approach that works hard to encroach as little as possible on users' privacy.
 
 #### If you do use this bot or a modified version of it, I would appreciate it if you would cite my [Shaping Pro and Anti-Social Behavior on Twitch Through Moderation and Example-Setting](https://dl.acm.org/citation.cfm?id=2998277) paper, as it was the first paper to use this bot.  
 
