@@ -173,15 +173,12 @@ while i < (ROUNDS + 1):
 					if "r9k" in line:
 						r9kmode = getr9k(line)
 						r9ksettings[channelname] = r9kmode
-						#print r9ksettings[channelname]
 					if "slow" in line:
 						slowmode = getslowmode(line)
 						slowsettings[channelname] = slowmode
-						#print slowsettings[channelname]
 					if "subs-only" in line:
 						submode = getsubmode(line)
 						subsettings[channelname] = submode
-						#print subsettings[channelname]
 					if "followers-only" in line:
 						followermode = getfollowersonly(line)
 						followersonlysettings[channelname] = followermode
