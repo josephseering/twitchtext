@@ -1,6 +1,6 @@
 # Twitch IRC scraping bot
 
-(Sorry, currently updating for Python 3. This works in Python 2.7)
+(This version works in Python 2.7; I'm getting around to writing a version that works in Python 3, but it'll take me a bit)
 
 #### Note: This scraper bot was created by and is maintained by Joseph Seering (me), jseering@andrew.cmu.edu. I am happy to share this code with you to help you gather data, but I'd appreciate it if you let me know who you are and roughly what you plan to do with it.
 
